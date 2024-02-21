@@ -1,0 +1,28 @@
+plugins {
+    id 'java'
+
+    id 'org.graalvm.buildtools.native' version '0.9.28'
+}
+
+group = 'com.example.mycli'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    sourceCompatibility = '17'
+}
+
+repositories {
+    mavenCentral()
+}
+
+bootRun{
+    systemProperty "appName", "cli";
+}
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

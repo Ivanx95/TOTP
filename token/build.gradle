@@ -1,0 +1,31 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    sourceCompatibility = '17'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation( project(":OTPAlgo"))
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+task execute (type:JavaExec) {
+    mainClass = "com.example.cliclient.TokenUI"
+    classpath = sourceSets.main.runtimeClasspath
+
+    systemProperty "app.lapse", "60000"
+    args System.getProperty("exec.args", "").split()
+}
